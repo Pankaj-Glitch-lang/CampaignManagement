@@ -20,7 +20,7 @@ const CampaignForm = () => {
         if (id) {
             const fetchCampaign = async () => {
                 try {
-                    const response = await api.get(`/api/campaigns/${id}`);
+                    const response = await api.get(`api/campaigns/${id}`);
                     setFormData(response.data);
                 } catch (error) {
                     console.error(error);
@@ -36,9 +36,9 @@ const CampaignForm = () => {
 
         try {
             if (id) {
-                await api.put(`/api/campaigns/${id}`, formData);
+                await api.put(`api/campaigns/${id}`, formData);
             } else {
-                await api.post('/api/campaigns/', formData);
+                await api.post('api/campaigns/', formData);
             }
             navigate('/');
         } catch (error) {

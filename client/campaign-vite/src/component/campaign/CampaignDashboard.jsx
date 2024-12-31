@@ -10,7 +10,7 @@ const CampaignDashboard = () => {
     useEffect(() => {
         const fetchCampaigns = async () => {
             try {
-                const response = await api.get('/api/campaigns');
+                const response = await api.get('api/campaigns');
                 setCampaigns(response.data);
             } catch (error) {
                 console.error(error);
@@ -24,7 +24,7 @@ const CampaignDashboard = () => {
         if (!window.confirm('Are you sure you want to delete this campaign?')) return;
 
         try {
-            await api.delete(`/api/campaigns/${id}`);
+            await api.delete(`api/campaigns/${id}`);
             setCampaigns(campaigns.filter(campaign => campaign._id !== id));
         } catch (error) {
             console.error(error);
@@ -33,7 +33,7 @@ const CampaignDashboard = () => {
 
     const sendCampaign = async (id) => {
         try {
-            await api.post(`/api/campaigns/${id}/send`);
+            await api.post(`api/campaigns/${id}/send`);
             setSuccessMessage('Campaign sent successfully!');
             setTimeout(() => setSuccessMessage(''), 3000); // Clear message after 3 seconds
         } catch (error) {

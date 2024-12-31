@@ -16,7 +16,7 @@ const Login = () => {
         setError('');
 
         try {
-            const response = await api.post('/admin/login', { email, password });
+            const response = await api.post('admin/login', { email, password });
             const token = response.data.token;
 
             if (token) {

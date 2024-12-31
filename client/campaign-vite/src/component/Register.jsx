@@ -17,7 +17,7 @@ const Register = () => {
     setSuccessMessage('');
 
     try {
-      const response = await api.post('/admin/register', { email, password });
+      const response = await api.post('admin/register', { email, password });
       setSuccessMessage('Registration successful! You can now log in.');
       
       naviagate('/login')
