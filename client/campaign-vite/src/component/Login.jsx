@@ -34,7 +34,7 @@ const Login = () => {
         <div className="login-container">
             <div className="login-box">
                 <h2>Admin Login</h2>
-                
+                <h4>Please sign in before proceeding to the Admin Dashboard</h4>
                 {/* Error message */}
                 {error && <div className="error-message">{error}</div>}
 
