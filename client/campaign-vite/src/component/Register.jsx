@@ -1,15 +1,14 @@
 import React, { useState } from 'react';
 import api from '../../services/api';
 import '../App.css';  // Make sure to create the corresponding CSS file
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';  // Import Link from react-router-dom
 
 const Register = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
-  const naviagate=useNavigate()
-
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -20,7 +19,7 @@ const Register = () => {
       const response = await api.post('admin/register', { email, password });
       setSuccessMessage('Registration successful! You can now log in.');
       
-      naviagate('/login')
+      navigate('/login'); // Redirect to login after successful registration
     } catch (err) {
       setError(err.response?.data?.message || 'Registration failed. Please try again.');
     }
@@ -75,9 +74,9 @@ const Register = () => {
           </button>
         </form>
 
-        {/* Login Link */}
+        {/* Login Link using Link */}
         <div className="login-link">
-          <p>Have an account? <a href="/login">Login here</a></p>
+          <p>Have an account? <Link to="/login">Login here</Link></p>
         </div>
       </div>
     </div>

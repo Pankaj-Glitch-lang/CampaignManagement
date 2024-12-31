@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import api from '../../services/api';
+import { Link } from 'react-router-dom'; // Import Link from react-router-dom
 import '../App.css';  // Create the corresponding CSS file
 
 const Login = () => {
@@ -74,9 +75,9 @@ const Login = () => {
                     </button>
                 </form>
 
-                {/* Register link */}
+                {/* Register link (Updated to use Link instead of <a>) */}
                 <div className="register-link">
-                    <p>Don't have an account? <a href="/register">Register here</a></p>
+                    <p>Don't have an account? <Link to="/register">Register here</Link></p>
                 </div>
             </div>
         </div>
