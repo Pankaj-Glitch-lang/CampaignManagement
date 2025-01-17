@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import api from '../../../services/api';
-import '../../App.css'
-
+import DatePicker from 'react-datepicker';
+import "react-datepicker/dist/react-datepicker.css"; // Include CSS for styling
+import '../../App.css';
 
 const CampaignForm = () => {
     const { id } = useParams();
@@ -14,6 +15,7 @@ const CampaignForm = () => {
         subject: '',
         content: '',
         scheduled_time: '',
+        cronExpression: ''
     });
 
     useEffect(() => {
@@ -46,6 +48,22 @@ const CampaignForm = () => {
         }
     };
 
+    const handleChangeSchedule = (date) => {
+        setFormData({
+            ...formData,
+            scheduled_time: date.toISOString(), // Save the selected date in ISO format
+            cronExpression: generateCronExpression(date) // Generate the cron expression
+        });
+    };
+
+    const generateCronExpression = (date) => {
+        const minutes = date.getUTCMinutes();
+        const hours = date.getUTCHours();
+        const day = date.getUTCDate();
+        const month = date.getUTCMonth() + 1; // Months are 0-based
+        return `${minutes} ${hours} ${day} ${month} *`; // Simple cron expression for specific date/time
+    };
+
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
@@ -64,9 +82,7 @@ const CampaignForm = () => {
                 />
             </div>
             <div className="form-group">
-                <label className="form-label">
-                    Recipients (comma-separated emails):
-                </label>
+                <label className="form-label">Recipients (comma-separated emails):</label>
                 <textarea
                     name="recipients"
                     value={formData.recipients}
@@ -92,6 +108,18 @@ const CampaignForm = () => {
                     onChange={handleChange}
                     required
                     className="form-textarea"
+                />
+            </div>
+            <div className="form-group">
+                <label className="form-label">Schedule Time:</label>
+                <DatePicker
+                    selected={formData.scheduled_time ? new Date(formData.scheduled_time) : null}
+                    onChange={handleChangeSchedule}
+                    showTimeSelect
+                    timeIntervals={15}
+                    dateFormat="Pp"
+                    minDate={new Date()} // Prevent selecting past dates
+                    required
                 />
             </div>
             <div className="form-actions">
