@@ -2,6 +2,7 @@
 const express=require('express')
 const dotenv=require('dotenv')
 const mongoose=require('mongoose')
+const cron=require('node-cron')
 const cors = require('cors');
 const CampaignRouter = require('./router/campaign.router');
 const AdminRouter = require('./router/admin.router');
@@ -18,6 +19,10 @@ const atlasDb= ()=>{
 
 }
 
+app.post('/task',(req,res)=>{
+
+    const {name,description,recipients, subject,content,cronExpression}=req.body
+})
 
 app.use('/api/campaigns',CampaignRouter)
 app.use('/admin',AdminRouter)
