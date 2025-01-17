@@ -19,10 +19,7 @@ const atlasDb= ()=>{
 
 }
 
-app.post('/task',(req,res)=>{
 
-    const {name,description,recipients, subject,content,cronExpression}=req.body
-})
 
 app.use('/api/campaigns',CampaignRouter)
 app.use('/admin',AdminRouter)

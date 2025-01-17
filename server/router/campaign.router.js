@@ -7,7 +7,7 @@ const {
     createCampaign,
     updateCampaign,
     deleteCampaign,
-    sendCampaignEmails,
+    sendCampaignEmailsManual,
     getCampaignMetrics
 } = require('../controllers/campaign.controller');
 
@@ -27,7 +27,7 @@ router.put('/:id',auth,  updateCampaign);
 router.delete('/:id',auth, deleteCampaign);
 
 // Send emails for a campaign
-router.post('/:id/send',auth,sendCampaignEmails);
+router.post('/:id/send',auth,sendCampaignEmailsManual);
 
 // Get performance metrics for a campaign
 router.get('/:id/metrics', auth,getCampaignMetrics);
